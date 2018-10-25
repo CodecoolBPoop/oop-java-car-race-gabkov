@@ -12,6 +12,7 @@ public class Race {
     private List<Car> cars = new ArrayList<>();
     private List<Motorcycle> motorcycles = new ArrayList<>();
     private List<Truck> trucks = new ArrayList<>();
+    private List<Integer> weather = new ArrayList<>();
 
     private int brokenTruckSpeedLimit = 75;
 
@@ -28,34 +29,38 @@ public class Race {
             Car car = cars.get(i);
             Motorcycle motor = motorcycles.get(i);
             Truck truck = trucks.get(i);
+            int rained = 0;
             for (int j = 0; j < 50; j++) {
-                    Weather.setRaining();
-                    if(Weather.isRaining() && isThereABrokenTruck(truck)){
-                        car.moveForAnHour(brokenTruckSpeedLimit);
-                        motor.moveForAnHour(brokenTruckSpeedLimit - (rand.nextInt(5) + 51));
-                    }else if(Weather.isRaining()) {
-                        car.moveForAnHour(car.getSpeed());
-                        motor.moveForAnHour(100 - (rand.nextInt(5) + 51));
-                        truck.moveForAnHour(truck.getSpeed());
-                    }else if (isThereABrokenTruck(truck)){
-                        car.moveForAnHour(brokenTruckSpeedLimit);
-                        motor.moveForAnHour(brokenTruckSpeedLimit );
-                    } else {
-                        car.moveForAnHour(car.getSpeed());
-                        motor.moveForAnHour(motor.getSpeed());
-                        truck.moveForAnHour(truck.getSpeed());
-                    }
+                Weather.setRaining();
+                if(Weather.isRaining() && isThereABrokenTruck(truck)){
+                    car.moveForAnHour(brokenTruckSpeedLimit);
+                    motor.moveForAnHour(brokenTruckSpeedLimit - (rand.nextInt(5) + 51));
+                    rained++;
+                }else if(Weather.isRaining()) {
+                    car.moveForAnHour(car.getSpeed());
+                    motor.moveForAnHour(100 - (rand.nextInt(5) + 51));
+                    truck.moveForAnHour(truck.getSpeed());
+                    rained++;
+                }else if (isThereABrokenTruck(truck)){
+                    car.moveForAnHour(brokenTruckSpeedLimit);
+                    motor.moveForAnHour(brokenTruckSpeedLimit );
+                } else {
+                    car.moveForAnHour(car.getSpeed());
+                    motor.moveForAnHour(motor.getSpeed());
+                    truck.moveForAnHour(truck.getSpeed());
                 }
+                if(j == 49) weather.add(rained);
+            }
         }
     }
 
 
     private void printRaceResults(){
         for (int i = 0; i < 10; i++) {
-            System.out.println("Race: " + (i+1));
-            System.out.println(cars.get(i).getName() + " " + cars.get(i).getDistanceTraveled() + " " + Car.class.getSimpleName());
-            System.out.println(motorcycles.get(i).getName() + " " + motorcycles.get(i).getDistanceTraveled() + " " + Motorcycle.class.getSimpleName());
-            System.out.println(trucks.get(i).getName() + " " + trucks.get(i).getDistanceTraveled() + " " + Truck.class.getSimpleName());
+            System.out.println("Race: " + (i+1) + " | " + "Rain: " + (int)((float)weather.get(i)/50*100) + "% |");
+            System.out.println("> "+cars.get(i).getName() + " " + cars.get(i).getDistanceTraveled() + " " + Car.class.getSimpleName());
+            System.out.println("> "+motorcycles.get(i).getName() + " " + motorcycles.get(i).getDistanceTraveled() + " " + Motorcycle.class.getSimpleName());
+            System.out.println("> "+trucks.get(i).getName() + " " + trucks.get(i).getDistanceTraveled() + " " + Truck.class.getSimpleName());
             System.out.println();
         }
     }
