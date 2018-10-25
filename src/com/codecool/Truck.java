@@ -3,7 +3,7 @@ package com.codecool;
 import java.util.Random;
 
 public class Truck extends Vehicle {
-    private int speed = 100;
+    private int speed;
     private int breakDownTurnsLeft;
     private int nameNumber;
 
@@ -17,10 +17,17 @@ public class Truck extends Vehicle {
         return nameNumber;
     }
 
-    public int getBreakDownTurnsLeft(){
+    int getBreakDownTurnsLeft(){
         return breakDownTurnsLeft;
     }
 
+    void setSpeed(){
+        speed = 100;
+    }
+
+    void decrementBreakDownTrunsLeft(){
+        breakDownTurnsLeft--;
+    }
 
     Truck(){
         this.nameNumber = rand.nextInt(1001);
@@ -28,8 +35,6 @@ public class Truck extends Vehicle {
         if (chanceToBreakDown <= 5 && breakDownTurnsLeft == 0){
             speed = 0;
             breakDownTurnsLeft = 2;
-        } else if (breakDownTurnsLeft > 0) {
-            breakDownTurnsLeft -= 1;
         } else {
             speed = 100;
         }

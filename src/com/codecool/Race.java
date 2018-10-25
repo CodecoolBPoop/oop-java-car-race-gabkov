@@ -9,9 +9,9 @@ public class Race {
 
     private Random rand = new Random();
 
-    List<Car> cars = new ArrayList<>();
-    List<Motorcycle> motorcycles = new ArrayList<>();
-    List<Truck> trucks = new ArrayList<>();
+    private List<Car> cars = new ArrayList<>();
+    private List<Motorcycle> motorcycles = new ArrayList<>();
+    private List<Truck> trucks = new ArrayList<>();
 
     private void createVehicles(){
         for (int i = 0; i < 10; i++) {
@@ -25,10 +25,16 @@ public class Race {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 50; j++) {
                 Weather.setRaining();
-                if(Weather.isRaining()){
+                if(Weather.isRaining() && isThereABrokenTruck(trucks.get(i))){
+                    cars.get(i).moveForAnHour(75);
+                    motorcycles.get(i).moveForAnHour(75 - (rand.nextInt(5) + 51));
+                }else if(Weather.isRaining()) {
                     cars.get(i).moveForAnHour(cars.get(i).getSpeed());
                     motorcycles.get(i).moveForAnHour(100 - (rand.nextInt(5) + 51));
                     trucks.get(i).moveForAnHour(trucks.get(i).getSpeed());
+                }else if (isThereABrokenTruck(trucks.get(i))){
+                    cars.get(i).moveForAnHour(75);
+                    motorcycles.get(i).moveForAnHour(75 );
                 } else {
                     cars.get(i).moveForAnHour(cars.get(i).getSpeed());
                     motorcycles.get(i).moveForAnHour(motorcycles.get(i).getSpeed());
@@ -36,9 +42,7 @@ public class Race {
                 }
             }
         }
-    } // simulates the race by
-    // - calling moveForAnHour() on every vehicle 50 times
-    // - setting whether its raining
+    }
 
 
     private void printRaceResults(){
@@ -49,8 +53,14 @@ public class Race {
         }
     }
 
-    boolean isThereABrokenTruck(){
-        return true;
+    boolean isThereABrokenTruck(Truck truck){
+        if (truck.getBreakDownTurnsLeft() > 0){
+            truck.decrementBreakDownTrunsLeft();
+            return true;
+        } else {
+            truck.setSpeed();
+            return false;
+        }
     }
 
 
