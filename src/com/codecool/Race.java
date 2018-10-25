@@ -25,22 +25,25 @@ public class Race {
 
     private void simulateRace(){
         for (int i = 0; i < 10; i++) {
+            Car car = cars.get(i);
+            Motorcycle motor = motorcycles.get(i);
+            Truck truck = trucks.get(i);
             for (int j = 0; j < 50; j++) {
                 Weather.setRaining();
-                if(Weather.isRaining() && isThereABrokenTruck(trucks.get(i))){
-                    cars.get(i).moveForAnHour(brokenTruckSpeedLimit);
-                    motorcycles.get(i).moveForAnHour(brokenTruckSpeedLimit - (rand.nextInt(5) + 51));
+                if(Weather.isRaining() && isThereABrokenTruck(truck)){
+                    car.moveForAnHour(brokenTruckSpeedLimit);
+                    motor.moveForAnHour(brokenTruckSpeedLimit - (rand.nextInt(5) + 51));
                 }else if(Weather.isRaining()) {
-                    cars.get(i).moveForAnHour(cars.get(i).getSpeed());
-                    motorcycles.get(i).moveForAnHour(100 - (rand.nextInt(5) + 51));
-                    trucks.get(i).moveForAnHour(trucks.get(i).getSpeed());
-                }else if (isThereABrokenTruck(trucks.get(i))){
-                    cars.get(i).moveForAnHour(brokenTruckSpeedLimit);
-                    motorcycles.get(i).moveForAnHour(brokenTruckSpeedLimit );
+                    car.moveForAnHour(car.getSpeed());
+                    motor.moveForAnHour(100 - (rand.nextInt(5) + 51));
+                    truck.moveForAnHour(truck.getSpeed());
+                }else if (isThereABrokenTruck(truck)){
+                    car.moveForAnHour(brokenTruckSpeedLimit);
+                    motor.moveForAnHour(brokenTruckSpeedLimit );
                 } else {
-                    cars.get(i).moveForAnHour(cars.get(i).getSpeed());
-                    motorcycles.get(i).moveForAnHour(motorcycles.get(i).getSpeed());
-                    trucks.get(i).moveForAnHour(trucks.get(i).getSpeed());
+                    car.moveForAnHour(car.getSpeed());
+                    motor.moveForAnHour(motor.getSpeed());
+                    truck.moveForAnHour(truck.getSpeed());
                 }
             }
         }
