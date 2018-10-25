@@ -1,21 +1,10 @@
 package com.codecool;
 
-import java.util.Random;
 
 public class Truck extends Vehicle {
-    private int speed;
+
     private int breakDownTurnsLeft;
-    private int nameNumber;
 
-    private Random rand = new Random();
-
-    int getSpeed(){
-        return speed;
-    }
-
-    int getNameNumber(){
-        return nameNumber;
-    }
 
     int getBreakDownTurnsLeft(){
         return breakDownTurnsLeft;
@@ -30,7 +19,7 @@ public class Truck extends Vehicle {
     }
 
     Truck(){
-        this.nameNumber = rand.nextInt(1001);
+        this.name = String.valueOf(rand.nextInt(1001));
         int chanceToBreakDown = rand.nextInt(101) + 1;
         if (chanceToBreakDown <= 5 && breakDownTurnsLeft == 0){
             speed = 0;

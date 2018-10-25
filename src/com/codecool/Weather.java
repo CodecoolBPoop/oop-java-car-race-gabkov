@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Weather {
 
-    static boolean isRaining;
+    private static boolean isRaining;
 
     static void setRaining() {
         Random rand = new Random();

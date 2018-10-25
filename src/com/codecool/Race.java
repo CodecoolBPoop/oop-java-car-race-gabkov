@@ -13,6 +13,8 @@ public class Race {
     private List<Motorcycle> motorcycles = new ArrayList<>();
     private List<Truck> trucks = new ArrayList<>();
 
+    private int brokenTruckSpeedLimit = 75;
+
     private void createVehicles(){
         for (int i = 0; i < 10; i++) {
             cars.add(new Car());
@@ -26,15 +28,15 @@ public class Race {
             for (int j = 0; j < 50; j++) {
                 Weather.setRaining();
                 if(Weather.isRaining() && isThereABrokenTruck(trucks.get(i))){
-                    cars.get(i).moveForAnHour(75);
-                    motorcycles.get(i).moveForAnHour(75 - (rand.nextInt(5) + 51));
+                    cars.get(i).moveForAnHour(brokenTruckSpeedLimit);
+                    motorcycles.get(i).moveForAnHour(brokenTruckSpeedLimit - (rand.nextInt(5) + 51));
                 }else if(Weather.isRaining()) {
                     cars.get(i).moveForAnHour(cars.get(i).getSpeed());
                     motorcycles.get(i).moveForAnHour(100 - (rand.nextInt(5) + 51));
                     trucks.get(i).moveForAnHour(trucks.get(i).getSpeed());
                 }else if (isThereABrokenTruck(trucks.get(i))){
-                    cars.get(i).moveForAnHour(75);
-                    motorcycles.get(i).moveForAnHour(75 );
+                    cars.get(i).moveForAnHour(brokenTruckSpeedLimit);
+                    motorcycles.get(i).moveForAnHour(brokenTruckSpeedLimit );
                 } else {
                     cars.get(i).moveForAnHour(cars.get(i).getSpeed());
                     motorcycles.get(i).moveForAnHour(motorcycles.get(i).getSpeed());
@@ -49,7 +51,7 @@ public class Race {
         for (int i = 0; i < 10; i++) {
             System.out.println(cars.get(i).getName() + " " + cars.get(i).getDistanceTraveled() + " " + Car.class.getSimpleName());
             System.out.println(motorcycles.get(i).getName() + " " + motorcycles.get(i).getDistanceTraveled() + " " + Motorcycle.class.getSimpleName());
-            System.out.println(trucks.get(i).getNameNumber() + " " + trucks.get(i).getDistanceTraveled() + " " + Truck.class.getSimpleName());
+            System.out.println(trucks.get(i).getName() + " " + trucks.get(i).getDistanceTraveled() + " " + Truck.class.getSimpleName());
         }
     }
 
