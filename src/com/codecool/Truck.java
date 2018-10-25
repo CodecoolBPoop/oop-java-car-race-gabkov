@@ -25,7 +25,7 @@ public class Truck extends Vehicle {
         speed = 100;
     }
 
-    void decrementBreakDownTrunsLeft(){
+    void decrementBreakDownTurnsLeft(){
         breakDownTurnsLeft--;
     }
 

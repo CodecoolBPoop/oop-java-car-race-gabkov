@@ -53,9 +53,9 @@ public class Race {
         }
     }
 
-    boolean isThereABrokenTruck(Truck truck){
+    private boolean isThereABrokenTruck(Truck truck){
         if (truck.getBreakDownTurnsLeft() > 0){
-            truck.decrementBreakDownTrunsLeft();
+            truck.decrementBreakDownTurnsLeft();
             return true;
         } else {
             truck.setSpeed();
