@@ -12,11 +12,11 @@ public class Car extends Vehicle {
 
     private Random rand = new Random();
 
-    public int getSpeed(){
+    int getSpeed(){
        return speed;
     }
 
-    public String getName(){
+    String getName(){
         return name;
     }
 

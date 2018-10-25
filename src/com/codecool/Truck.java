@@ -9,11 +9,11 @@ public class Truck extends Vehicle {
 
     private Random rand = new Random();
 
-    public int getSpeed(){
+    int getSpeed(){
         return speed;
     }
 
-    public int getNameNumber(){
+    int getNameNumber(){
         return nameNumber;
     }
 

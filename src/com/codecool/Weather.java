@@ -7,7 +7,7 @@ public class Weather {
 
     static boolean isRaining;
 
-    public static void setRaining() {
+    static void setRaining() {
         Random rand = new Random();
         int rainingChance = rand.nextInt(10) + 1;
         if (rainingChance <= 3) {
@@ -17,7 +17,7 @@ public class Weather {
         }
     }
 
-    public static boolean isRaining(){
+    static boolean isRaining(){
         return isRaining;
     }
 }

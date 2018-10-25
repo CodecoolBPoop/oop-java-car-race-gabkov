@@ -4,7 +4,7 @@ public abstract class Vehicle {
 
     private int distanceTraveled;
 
-    public int getDistanceTraveled(){
+    int getDistanceTraveled(){
         return distanceTraveled;
     }
 
