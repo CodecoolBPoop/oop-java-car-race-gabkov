@@ -17,7 +17,7 @@ public class Weather {
         }
     }
 
-    static boolean isRaining(){
+    public static boolean isRaining(){
         return isRaining;
     }
 }
